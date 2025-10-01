@@ -7,11 +7,16 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
+import { resolve } from '@/sanity/presentation/resolve'
+
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
+import { presentationTool } from 'sanity/presentation'
+import { assist } from "@sanity/assist";
+
 
 export default defineConfig({
   basePath: '/studio',
@@ -24,5 +29,17 @@ export default defineConfig({
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
+    presentationTool({
+      resolve,
+      previewUrl: {
+        previewMode: {
+          enable: '/api/draft-mode/enable',
+        },
+      },
+    }),
+    assist(),
   ],
+  document: {
+    newDocumentOptions: (prev) => prev.filter((item) => item.templateId !== "siteSettings"),
+  },
 })

@@ -55,6 +55,15 @@ export const postType = defineType({
       name: 'body',
       type: 'blockContent',
     }),
+    defineField({
+      name: "relatedPosts",
+      type: "array",
+      of: [{ type: "reference", to: { type: "post" } }],
+    }),
+    defineField({
+      name: "seo",
+      type: "seo",
+    }),
   ],
   preview: {
     select: {
