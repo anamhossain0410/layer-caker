@@ -6,6 +6,7 @@ export default async function Page() {
   const { data: page } = await sanityFetch({
     query: HOME_PAGE_QUERY,
   });
+  console.log('Fetched page:', page);
 
   return page?.homePage?.content ? (
     <PageBuilder documentId={page?.homePage._id}

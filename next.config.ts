@@ -2,6 +2,11 @@ import type { NextConfig } from "next";
 import { fetchRedirects } from "@/sanity/lib/fetchRedirects";
 
 const nextConfig: NextConfig = {
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
   images: {
     remotePatterns: [
       {
